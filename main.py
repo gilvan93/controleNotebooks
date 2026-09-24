@@ -97,7 +97,7 @@ def cadastrar_notebooks(): #função de cadastro dos notebooks
     patrimonio = input("Patrimônio: ")
     for notebook in notebooks:
         if notebook["patrimonio"] == patrimonio:
-            print("\nequipamento ja cadastrado")
+            print("\nEquipamento ja cadastrado")
             return
 
     serial = input("Serial: ")
