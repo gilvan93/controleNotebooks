@@ -1,5 +1,32 @@
 
 notebooks = [] #local onde ficará armazenado os notebooks
+def excluir_notebooks():
+    print("\n================================")
+    print("       EXCLUIR NOTEBOOK")
+    print("================================")
+
+    identificador = input("digite serial ou patrimônio: ")
+
+    for notebook in notebooks:
+        if identificador == notebook["patrimonio"] or identificador == notebook["serial"]:
+            exibir_notebook(notebook)
+
+            confirmacao = input("deseja continuar? [s/n] ")
+
+            if confirmacao == "s":
+                notebooks.remove(notebook)
+                print("\n notebook removido")
+                return
+
+            elif confirmacao == "n":
+                print("exclusão cancelada")
+                return
+
+            else:
+                print("\n Opção inválida")
+                return
+
+
 
 def exibir_notebook(notebook):
     print(f"Patrimônio: {notebook['patrimonio']}")
@@ -139,6 +166,7 @@ while True:
     print("2 - Listar notebooks")
     print("3 - buscar notebook")
     print("4 - editar disponibilidade do notebook")
+    print("5 - Excluir notebook")
     print("0 - Sair")
 
     opcao = input("Escolha uma opção: ")
@@ -154,6 +182,10 @@ while True:
 
     elif opcao == "4":
         editar_disponibilidade()
+
+    elif opcao == "5":
+        excluir_notebooks()
+
 
     elif opcao == "0":
         print("Encerrando o programa...")
