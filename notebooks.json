@@ -31,5 +31,16 @@
         "processador": "c",
         "armazenamento": "c",
         "referencia": "c"
+    },
+    {
+        "patrimonio": "d",
+        "serial": "d",
+        "marca": "d",
+        "modelo": "d",
+        "disponivel": false,
+        "memoria_ram": "d",
+        "processador": "d",
+        "armazenamento": "d",
+        "referencia": "d"
     }
 ]

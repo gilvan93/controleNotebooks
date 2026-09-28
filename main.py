@@ -1,29 +1,9 @@
-import json
+from funcoes.dados import carregar_notebooks,salvar_notebooks
 
 notebooks = [] #local onde ficará armazenado os notebooks
-
-def salvar_notebooks():
-    with open("notebooks.json", "w") as arquivo:
-        json.dump(notebooks, arquivo, indent=4)
-
-def carregar_notebooks():
-    try:
-        with open("notebooks.json", "r") as arquivo:
-            dados = json.load(arquivo)
-            print("dados carregados")
-            #print(dados)
-
-            return dados
-
-    except json.JSONDecodeError:
-        return []
-
-    except FileNotFoundError:
-        return []
-
 notebooks = carregar_notebooks()
 
-def excluir_notebooks():
+def excluir_notebooks(notebooks):
     print("\n================================")
     print("       EXCLUIR NOTEBOOK")
     print("================================")
@@ -38,7 +18,7 @@ def excluir_notebooks():
 
             if confirmacao == "s":
                 notebooks.remove(notebook)
-                salvar_notebooks()
+                salvar_notebooks(notebooks)
 
                 print("\n notebook removido")
                 return
@@ -70,7 +50,7 @@ def exibir_notebook(notebook):
 
     print("--------------------------------")
 
-def editar_disponibilidade():
+def editar_disponibilidade(notebooks):
 
     print("\n================================")
     print("       EDITAR DISPONIBILIDADE")
@@ -108,7 +88,7 @@ def editar_disponibilidade():
                 print("Opção inválida!")
                 return
 
-            salvar_notebooks()
+            salvar_notebooks(notebooks)
             print("\nDisponibilidade alterada com sucesso!")
             return
 
@@ -116,7 +96,7 @@ def editar_disponibilidade():
         print("\nNotebook não encontrado.")
 
 
-def buscar_notebooks():
+def buscar_notebooks(notebooks):
     print("\n================================")
     print("       BUSCAR NOTEBOOKS")
     print("================================")
@@ -130,7 +110,7 @@ def buscar_notebooks():
     if not encontrado:
         print("\nNotebook não encontrado")
 
-def listar_notebooks():
+def listar_notebooks(notebooks):
     print("\n================================")
     print("       NOTEBOOKS CADASTRADOS")
     print("================================")
@@ -144,7 +124,7 @@ def listar_notebooks():
         print("---------------------------------")
 
 
-def cadastrar_notebooks(): #função de cadastro dos notebooks
+def cadastrar_notebooks(notebooks): #função de cadastro dos notebooks
     print("\nCadastro de notebook")
 
     patrimonio = input("Patrimônio: ")
@@ -180,7 +160,7 @@ def cadastrar_notebooks(): #função de cadastro dos notebooks
         "referencia": referencia
     }
     notebooks.append(notebook)
-    salvar_notebooks()
+    salvar_notebooks(notebooks)
     print("\nNotebook cadastrado:")
 
 
@@ -199,19 +179,19 @@ while True:
     opcao = input("Escolha uma opção: ")
 
     if opcao == "1":
-        cadastrar_notebooks()
+        cadastrar_notebooks(notebooks)
 
     elif opcao == "2":
-        listar_notebooks()
+        listar_notebooks(notebooks)
 
     elif opcao == "3":
-        buscar_notebooks()
+        buscar_notebooks(notebooks)
 
     elif opcao == "4":
-        editar_disponibilidade()
+        editar_disponibilidade(notebooks)
 
     elif opcao == "5":
-        excluir_notebooks()
+        excluir_notebooks(notebooks)
 
 
     elif opcao == "0":
