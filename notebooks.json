@@ -1,0 +1,35 @@
+[
+    {
+        "patrimonio": "a",
+        "serial": "a",
+        "marca": "a",
+        "modelo": "a",
+        "disponivel": true,
+        "memoria_ram": "a",
+        "processador": "a",
+        "armazenamento": "a",
+        "referencia": "a"
+    },
+    {
+        "patrimonio": "b",
+        "serial": "b",
+        "marca": "b",
+        "modelo": "b",
+        "disponivel": true,
+        "memoria_ram": "b",
+        "processador": "b",
+        "armazenamento": "b",
+        "referencia": "b"
+    },
+    {
+        "patrimonio": "c",
+        "serial": "c",
+        "marca": "c",
+        "modelo": "c",
+        "disponivel": true,
+        "memoria_ram": "c",
+        "processador": "c",
+        "armazenamento": "c",
+        "referencia": "c"
+    }
+]

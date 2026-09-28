@@ -1,5 +1,28 @@
+import json
 
 notebooks = [] #local onde ficará armazenado os notebooks
+
+def salvar_notebooks():
+    with open("notebooks.json", "w") as arquivo:
+        json.dump(notebooks, arquivo, indent=4)
+
+def carregar_notebooks():
+    try:
+        with open("notebooks.json", "r") as arquivo:
+            dados = json.load(arquivo)
+            print("dados carregados")
+            #print(dados)
+
+            return dados
+
+    except json.JSONDecodeError:
+        return []
+
+    except FileNotFoundError:
+        return []
+
+notebooks = carregar_notebooks()
+
 def excluir_notebooks():
     print("\n================================")
     print("       EXCLUIR NOTEBOOK")
@@ -15,11 +38,13 @@ def excluir_notebooks():
 
             if confirmacao == "s":
                 notebooks.remove(notebook)
+                salvar_notebooks()
+
                 print("\n notebook removido")
                 return
 
             elif confirmacao == "n":
-                print("exclusão cancelada")
+                print("\nexclusão cancelada")
                 return
 
             else:
@@ -83,6 +108,7 @@ def editar_disponibilidade():
                 print("Opção inválida!")
                 return
 
+            salvar_notebooks()
             print("\nDisponibilidade alterada com sucesso!")
             return
 
@@ -154,6 +180,7 @@ def cadastrar_notebooks(): #função de cadastro dos notebooks
         "referencia": referencia
     }
     notebooks.append(notebook)
+    salvar_notebooks()
     print("\nNotebook cadastrado:")
 
 
