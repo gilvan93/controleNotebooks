@@ -1,7 +1,7 @@
 from funcoes.dados import carregar_notebooks,salvar_notebooks
 
 notebooks = [] #local onde ficará armazenado os notebooks
-notebooks = carregar_notebooks()
+
 
 def excluir_notebooks(notebooks):
     print("\n================================")
@@ -164,38 +164,44 @@ def cadastrar_notebooks(notebooks): #função de cadastro dos notebooks
     print("\nNotebook cadastrado:")
 
 
-while True:
-    print("================================")
-    print("   CONTROLE DE NOTEBOOKS")
-    print("================================")
+def main():
+    notebooks = carregar_notebooks()
 
-    print("1 - Cadastrar notebook")
-    print("2 - Listar notebooks")
-    print("3 - buscar notebook")
-    print("4 - editar disponibilidade do notebook")
-    print("5 - Excluir notebook")
-    print("0 - Sair")
+    while True:
+        print("================================")
+        print("   CONTROLE DE NOTEBOOKS")
+        print("================================")
 
-    opcao = input("Escolha uma opção: ")
+        print("1 - Cadastrar notebook")
+        print("2 - Listar notebooks")
+        print("3 - buscar notebook")
+        print("4 - editar disponibilidade do notebook")
+        print("5 - Excluir notebook")
+        print("0 - Sair")
 
-    if opcao == "1":
-        cadastrar_notebooks(notebooks)
+        opcao = input("Escolha uma opção: ")
 
-    elif opcao == "2":
-        listar_notebooks(notebooks)
+        if opcao == "1":
+            cadastrar_notebooks(notebooks)
 
-    elif opcao == "3":
-        buscar_notebooks(notebooks)
+        elif opcao == "2":
+            listar_notebooks(notebooks)
 
-    elif opcao == "4":
-        editar_disponibilidade(notebooks)
+        elif opcao == "3":
+            buscar_notebooks(notebooks)
 
-    elif opcao == "5":
-        excluir_notebooks(notebooks)
+        elif opcao == "4":
+            editar_disponibilidade(notebooks)
+
+        elif opcao == "5":
+            excluir_notebooks(notebooks)
 
 
-    elif opcao == "0":
-        print("Encerrando o programa...")
-        break
+        elif opcao == "0":
+            print("Encerrando o programa...")
+            break
 
-print(notebooks)
+    print(notebooks)
+
+if __name__ == "__main__":
+    main()
