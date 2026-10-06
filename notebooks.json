@@ -11,17 +11,6 @@
         "referencia": "a"
     },
     {
-        "patrimonio": "b",
-        "serial": "b",
-        "marca": "b",
-        "modelo": "b",
-        "disponivel": true,
-        "memoria_ram": "b",
-        "processador": "b",
-        "armazenamento": "b",
-        "referencia": "b"
-    },
-    {
         "patrimonio": "c",
         "serial": "c",
         "marca": "c",

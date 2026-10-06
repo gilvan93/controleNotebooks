@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Estoque de Notebooks</title>
+    <div class="pesquisa">
+    <input
+        type="text"
+        id="campoPesquisa"
+        placeholder="🔎 Pesquisar por patrimônio, serial, marca ou modelo..."
+    >
+    </div>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Indicadores -->
+    <div class="indicadores">
+
+        <div class="indicador total">
+            <h3>Total de Notebooks</h3>
+            <p>{{ total }}</p>
+        </div>
+
+        <div class="indicador disponiveis">
+            <h3>Disponíveis</h3>
+            <p>{{ disponiveis }}</p>
+        </div>
+
+        <div class="indicador locados">
+            <h3>Locados</h3>
+            <p>{{ locados }}</p>
+        </div>
+
+    </div>
+
+
+    <!-- Título -->
+    <h1>Estoque de Notebooks</h1>
+
+
+    <!-- Estoque separado por processador -->
+    {% for processador, notebooks_processador in processadores.items() %}
+
+        <section class="grupo-processador">
+
+            <h2>{{ processador }}</h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Patrimônio</th>
+                        <th>Serial</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Disponibilidade</th>
+                        <th>Memória RAM</th>
+                        <th>Armazenamento</th>
+                        <th>Referência</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for notebook in notebooks_processador %}
+
+                        <tr>
+
+                            <td>{{ notebook["patrimonio"] }}</td>
+
+                            <td>{{ notebook["serial"] }}</td>
+
+                            <td>{{ notebook["marca"] }}</td>
+
+                            <td>{{ notebook["modelo"] }}</td>
+
+                            <td>
+                                {% if notebook["disponivel"] %}
+                                    <span class="status disponivel">
+                                        Disponível
+                                    </span>
+                                {% else %}
+                                    <span class="status locado">
+                                        Locado
+                                    </span>
+                                {% endif %}
+                            </td>
+
+                            <td>{{ notebook["memoria_ram"] }}</td>
+
+                            <td>{{ notebook["armazenamento"] }}</td>
+
+                            <td>{{ notebook["referencia"] }}</td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    {% endfor %}
+    <script>
+
+    const campoPesquisa = document.getElementById("campoPesquisa");
+
+    campoPesquisa.addEventListener("input", function () {
+
+        const pesquisa = campoPesquisa.value.toLowerCase();
+
+        const tabelas = document.querySelectorAll("table");
+
+        tabelas.forEach(function (tabela) {
+
+            const linhas = tabela.querySelectorAll("tbody tr");
+
+            linhas.forEach(function (linha) {
+
+                const texto = linha.textContent.toLowerCase();
+
+                if (texto.includes(pesquisa)) {
+                    linha.style.display = "";
+                } else {
+                    linha.style.display = "none";
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+</body>
+
+</html>

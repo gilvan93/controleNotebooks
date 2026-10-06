@@ -1,7 +1,49 @@
 from funcoes.dados import carregar_notebooks,salvar_notebooks
 
-notebooks = [] #local onde ficará armazenado os notebooks
+def editar_disponibilidade(notebooks):
 
+    print("\n================================")
+    print("       EDITAR DISPONIBILIDADE")
+    print("================================")
+
+    identificador = input("Digite o patrimonio ou serial do notebook: ")
+
+    notebook = encontrar_notebook(notebooks, identificador)
+
+    if notebook is None:
+        print("\nNotebook não encontrado")
+        return
+
+    print(f"\nNotebook encontrado: {notebook['modelo']}")
+
+    if notebook["disponivel"]:
+        print("Notebook disponível para locação")
+    else:
+        print("Notebook locado")
+
+    print("\n1 - Marcar como disponível")
+    print("2 - Marcar como locado")
+
+    opcao = input("Escolha: ")
+
+    if opcao == "1":
+        notebook["disponivel"] = True
+
+    elif opcao == "2":
+        notebook["disponivel"] = False
+
+    else:
+        print("Opção inválida!")
+        return
+
+    salvar_notebooks(notebooks)
+    print("\nDisponibilidade alterada com sucesso!")
+
+def encontrar_notebook(notebooks, identificador):
+    for notebook in notebooks:
+        if notebook['patrimonio'] == identificador or notebook['serial'] == identificador:
+            return notebook
+    return None
 
 def excluir_notebooks(notebooks):
     print("\n================================")
@@ -9,27 +51,30 @@ def excluir_notebooks(notebooks):
     print("================================")
 
     identificador = input("digite serial ou patrimônio: ")
+    notebook = encontrar_notebook(notebooks,identificador)
 
-    for notebook in notebooks:
-        if identificador == notebook["patrimonio"] or identificador == notebook["serial"]:
-            exibir_notebook(notebook)
+    if notebook is None:
+        print("\nNotebook não encontrado")
+        return
 
-            confirmacao = input("deseja continuar? [s/n] ")
+    exibir_notebook(notebook)
 
-            if confirmacao == "s":
-                notebooks.remove(notebook)
-                salvar_notebooks(notebooks)
+    confirmacao = input("deseja continuar? [s/n] ")
 
-                print("\n notebook removido")
-                return
+    if confirmacao == "s":
+        notebooks.remove(notebook)
+        salvar_notebooks(notebooks)
 
-            elif confirmacao == "n":
-                print("\nexclusão cancelada")
-                return
+        print("\n notebook removido")
+        return
 
-            else:
-                print("\n Opção inválida")
-                return
+    elif confirmacao == "n":
+        print("\nexclusão cancelada")
+        return
+
+    else:
+        print("\n Opção inválida")
+        return
 
 
 
@@ -50,65 +95,19 @@ def exibir_notebook(notebook):
 
     print("--------------------------------")
 
-def editar_disponibilidade(notebooks):
-
-    print("\n================================")
-    print("       EDITAR DISPONIBILIDADE")
-    print("================================")
-
-    encontrado = False
-
-    identificador = input("Digite o patrimonio ou serial do notebook: ")
-
-    for notebook in notebooks:
-
-        if notebook["patrimonio"] == identificador or notebook["serial"] == identificador:
-
-            encontrado = True
-
-            print(f"\nNotebook encontrado: {notebook['modelo']}")
-
-            if notebook["disponivel"]:
-                print("Notebook disponível para locação")
-            else:
-                print("Notebook locado")
-
-            print("\n1 - Marcar como disponível")
-            print("2 - Marcar como locado")
-
-            opcao = input("Escolha: ")
-
-            if opcao == "1":
-                notebook["disponivel"] = True
-
-            elif opcao == "2":
-                notebook["disponivel"] = False
-
-            else:
-                print("Opção inválida!")
-                return
-
-            salvar_notebooks(notebooks)
-            print("\nDisponibilidade alterada com sucesso!")
-            return
-
-    if not encontrado:
-        print("\nNotebook não encontrado.")
 
 
 def buscar_notebooks(notebooks):
     print("\n================================")
     print("       BUSCAR NOTEBOOKS")
     print("================================")
-    encontrado = False
     identificador = input("Digite serial ou patrimonio do notebook: ")
-
-    for notebook in notebooks:
-        if identificador == notebook["patrimonio"] or identificador == notebook["serial"]:
-            exibir_notebook(notebook)
-            encontrado = True
-    if not encontrado:
+    notebook = encontrar_notebook(notebooks, identificador)
+    if notebook is not None:
+        exibir_notebook(notebook)
+    else:
         print("\nNotebook não encontrado")
+
 
 def listar_notebooks(notebooks):
     print("\n================================")
@@ -166,6 +165,8 @@ def cadastrar_notebooks(notebooks): #função de cadastro dos notebooks
 
 def main():
     notebooks = carregar_notebooks()
+    notebook = encontrar_notebook(notebooks, "b")
+    print(notebook)
 
     while True:
         print("================================")
@@ -201,7 +202,7 @@ def main():
             print("Encerrando o programa...")
             break
 
-    print(notebooks)
+    #print(notebooks)
 
 if __name__ == "__main__":
     main()
