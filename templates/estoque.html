@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -6,18 +7,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Estoque de Notebooks</title>
-    <div class="pesquisa">
-    <input
-        type="text"
-        id="campoPesquisa"
-        placeholder="🔎 Pesquisar por patrimônio, serial, marca ou modelo..."
-    >
-    </div>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
+
+    <!-- Área administrativa -->
+    {% if session.get("admin_logado") %}
+        <div class="area-administrativa">
+
+            <div class="info-administrador">
+                <strong>Área administrativa</strong>
+                <span>Você está conectado como administrador.</span>
+            </div>
+
+            <div class="acoes-administrativas">
+
+                <a href="{{ url_for('cadastrar') }}"
+                   class="botao-cadastrar-admin">
+                    + Cadastrar notebook
+                </a>
+
+                <form method="POST" action="{{ url_for('logout') }}">
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ csrf_token() }}"
+                    >
+
+                    <button type="submit" class="botao-sair-admin">
+                        Sair
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+    {% else %}
+
+        <a href="{{ url_for('login') }}" class="botao-login">
+            🔐 Login administrativo
+        </a>
+
+    {% endif %}
+
+
+    <!-- Pesquisa -->
+    <div class="pesquisa">
+        <input
+            type="text"
+            id="campoPesquisa"
+            placeholder="🔎 Pesquisar por patrimônio, serial, marca ou modelo..."
+        >
+    </div>
+
 
     <!-- Indicadores -->
     <div class="indicadores">
@@ -71,13 +116,9 @@
                     {% for notebook in notebooks_processador %}
 
                         <tr>
-
                             <td>{{ notebook["patrimonio"] }}</td>
-
                             <td>{{ notebook["serial"] }}</td>
-
                             <td>{{ notebook["marca"] }}</td>
-
                             <td>{{ notebook["modelo"] }}</td>
 
                             <td>
@@ -93,11 +134,8 @@
                             </td>
 
                             <td>{{ notebook["memoria_ram"] }}</td>
-
                             <td>{{ notebook["armazenamento"] }}</td>
-
                             <td>{{ notebook["referencia"] }}</td>
-
                         </tr>
 
                     {% endfor %}
@@ -109,37 +147,41 @@
         </section>
 
     {% endfor %}
+
+
+    <!-- Pesquisa dinâmica -->
     <script>
+        const campoPesquisa = document.getElementById("campoPesquisa");
 
-    const campoPesquisa = document.getElementById("campoPesquisa");
+        campoPesquisa.addEventListener("input", function () {
 
-    campoPesquisa.addEventListener("input", function () {
+            const pesquisa = campoPesquisa.value.toLowerCase().trim();
+            const grupos = document.querySelectorAll(".grupo-processador");
 
-        const pesquisa = campoPesquisa.value.toLowerCase();
+            grupos.forEach(function (grupo) {
 
-        const tabelas = document.querySelectorAll("table");
+                const linhas = grupo.querySelectorAll("tbody tr");
+                let encontrouResultado = false;
 
-        tabelas.forEach(function (tabela) {
+                linhas.forEach(function (linha) {
 
-            const linhas = tabela.querySelectorAll("tbody tr");
+                    const texto = linha.textContent.toLowerCase();
 
-            linhas.forEach(function (linha) {
+                    if (texto.includes(pesquisa)) {
+                        linha.style.display = "";
+                        encontrouResultado = true;
+                    } else {
+                        linha.style.display = "none";
+                    }
 
-                const texto = linha.textContent.toLowerCase();
+                });
 
-                if (texto.includes(pesquisa)) {
-                    linha.style.display = "";
-                } else {
-                    linha.style.display = "none";
-                }
+                grupo.style.display = encontrouResultado ? "" : "none";
 
             });
 
         });
+    </script>
 
-    });
-
-</script>
 </body>
-
 </html>

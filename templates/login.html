@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Controle de Notebooks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="pagina-login">
+    <div class="form-container">
+        <h1>Acesso administrativo</h1>
+        <p>Entre com suas credenciais para gerenciar os notebooks.</p>
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+                {% for categoria, mensagem in mensagens %}
+                    <div class="mensagem {{ categoria }}">
+                        {{ mensagem }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('login') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <label for="usuario">Usuário</label>
+            <input
+                type="text"
+                id="usuario"
+                name="usuario"
+                autocomplete="username"
+                required
+            >
+
+            <label for="senha">Senha</label>
+            <input
+                type="password"
+                id="senha"
+                name="senha"
+                autocomplete="current-password"
+                required
+            >
+
+            <button type="submit">Entrar</button>
+        </form>
+
+        <p><a href="{{ url_for('inicio') }}">Voltar ao painel</a></p>
+    </div>
+</body>
+</html>

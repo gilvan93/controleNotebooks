@@ -166,3 +166,423 @@ tbody tr:hover {
     border-color: #2563eb;
     box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
 }
+
+
+/* =========================
+   FORMULÁRIO DE CADASTRO
+   ========================= */
+
+.formulario-cadastro {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.campo label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.campo input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font-size: 15px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.botoes-formulario {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.botao-salvar,
+.botao-voltar {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.botao-salvar {
+    background-color: #2563eb;
+    color: white;
+}
+
+.botao-salvar:hover {
+    background-color: #1d4ed8;
+}
+
+.botao-voltar {
+    background-color: #e5e7eb;
+    color: #333;
+}
+
+.botao-voltar:hover {
+    background-color: #d1d5db;
+}
+
+@media (max-width: 600px) {
+    body {
+        margin: 20px;
+    }
+
+    .formulario-cadastro {
+        padding: 20px;
+    }
+
+    .botoes-formulario {
+        flex-direction: column;
+    }
+}
+.campo select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font-size: 15px;
+    background-color: white;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.campo select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+.botao-login {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #0d6efd, #0047ab);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 71, 171, 0.2);
+    transition: all 0.2s ease;
+    margin-bottom: 15px;
+}
+
+.botao-login:hover {
+    background: linear-gradient(135deg, #0047ab, #003580);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 71, 171, 0.3);
+}
+
+/* =========================
+   TELA DE LOGIN
+   ========================= */
+
+body.pagina-login {
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #eaf1ff, #f5f6f8);
+}
+
+.pagina-login .form-container {
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+    padding: 38px;
+    background-color: #ffffff;
+    border: 1px solid #e5eaf2;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(31, 55, 90, 0.12);
+}
+
+.pagina-login .form-container h1 {
+    margin: 0 0 12px;
+    color: #163665;
+    font-size: 28px;
+}
+
+.pagina-login .form-container > p {
+    margin: 0 0 28px;
+    color: #64748b;
+    text-align: center;
+    line-height: 1.6;
+}
+
+@media (max-width: 480px) {
+    body.pagina-login {
+        padding: 18px;
+    }
+
+    .pagina-login .form-container {
+        padding: 26px 22px;
+    }
+
+    .pagina-login .form-container h1 {
+        font-size: 24px;
+    }
+}
+
+/* Campos da tela de login */
+
+.pagina-login .form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.pagina-login .form-container label {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #334155;
+}
+
+.pagina-login .form-container input:not([type="hidden"]) {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #f8fafc;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pagina-login .form-container input:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* Botão Entrar */
+
+.pagina-login .form-container button {
+    width: 100%;
+    margin-top: 14px;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pagina-login .form-container button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 15px rgba(37, 99, 235, 0.3);
+}
+
+/* Link para voltar ao painel */
+
+.pagina-login .form-container a {
+    display: inline-block;
+    margin-top: 18px;
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.pagina-login .form-container a:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+/* =========================
+   ÁREA ADMINISTRATIVA
+   ========================= */
+
+.area-administrativa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 0 0 30px;
+    padding: 18px 22px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.05);
+}
+
+.info-administrador {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.info-administrador strong {
+    color: #163665;
+    font-size: 15px;
+}
+
+.info-administrador span {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.acoes-administrativas {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.botao-cadastrar-admin,
+.botao-sair-admin {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.botao-cadastrar-admin {
+    background: #2563eb;
+    color: #ffffff;
+    border: 1px solid #2563eb;
+}
+
+.botao-cadastrar-admin:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.botao-sair-admin {
+    background: #f8fafc;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+
+.botao-sair-admin:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: #fecaca;
+}
+
+@media (max-width: 600px) {
+    .area-administrativa {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .acoes-administrativas {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .botao-cadastrar-admin,
+    .botao-sair-admin {
+        text-align: center;
+    }
+}
+
+.area-administrativa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 0 0 30px;
+    padding: 18px 22px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.05);
+}
+
+.info-administrador {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.info-administrador strong {
+    color: #163665;
+    font-size: 15px;
+}
+
+.info-administrador span {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.acoes-administrativas {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.acoes-administrativas form {
+    margin: 0;
+}
+
+.botao-cadastrar-admin,
+.botao-sair-admin {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.botao-cadastrar-admin {
+    background: #2563eb;
+    color: #ffffff;
+    border: 1px solid #2563eb;
+}
+
+.botao-cadastrar-admin:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.botao-sair-admin {
+    background: #f8fafc;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+
+.botao-sair-admin:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: #fecaca;
+}

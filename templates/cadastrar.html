@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastrar Notebook</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <h1>Cadastrar Notebook</h1>
+
+    <div class="formulario-cadastro">
+
+        <form action="{{ url_for('cadastrar') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <div class="campo">
+                <label for="patrimonio">Patrimônio</label>
+                <input type="text" id="patrimonio" name="patrimonio" required>
+            </div>
+
+            <div class="campo">
+                <label for="serial">Serial</label>
+                <input type="text" id="serial" name="serial" required>
+            </div>
+
+            <div class="campo">
+                <label for="marca">Marca</label>
+                <input type="text" id="marca" name="marca" required>
+            </div>
+
+            <div class="campo">
+                <label for="modelo">Modelo</label>
+                <input type="text" id="modelo" name="modelo" required>
+            </div>
+
+            <div class="campo">
+                <label for="processador">Processador</label>
+                <input type="text" id="processador" name="processador" required>
+            </div>
+
+            <div class="campo">
+                <label for="memoria_ram">Memória RAM</label>
+                <input type="text" id="memoria_ram" name="memoria_ram" placeholder="Ex.: 8 GB" required>
+            </div>
+
+            <div class="campo">
+                <label for="armazenamento">Armazenamento</label>
+                <input type="text" id="armazenamento" name="armazenamento" placeholder="Ex.: SSD 256 GB" required>
+            </div>
+
+            <div class="campo">
+                <label for="disponivel">Disponibilidade</label>
+
+                <select id="disponivel" name="disponivel" required>
+                    <option value="true" selected>Disponível</option>
+                    <option value="false">Locado</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="referencia">Referência</label>
+                <input type="text" id="referencia" name="referencia" required>
+            </div>
+
+            <div class="botoes-formulario">
+                <button type="submit" class="botao-salvar">
+                    Cadastrar notebook
+                </button>
+
+                <a href="{{ url_for('inicio') }}" class="botao-voltar">
+                    Voltar ao estoque
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
