@@ -147,7 +147,8 @@ def cadastrar():
             "memoria_ram": request.form["memoria_ram"].strip(),
             "processador": request.form["processador"].strip(),
             "armazenamento": request.form["armazenamento"].strip(),
-            "referencia": request.form["referencia"].strip()
+            "referencia": request.form["referencia"].strip(),
+            "observacao": request.form.get["observacao", ""].strip()
         }
 
         # Adicionar à lista e salvar no JSON
@@ -158,6 +159,45 @@ def cadastrar():
         return redirect(url_for("inicio"))
 
     return render_template("cadastrar.html")
+
+@app.route("/editar/<patrimonio>", methods=["POST"])
+@login_obrigatorio
+def editar_notebook(patrimonio):
+    notebooks = carregar_notebooks()
+
+    notebook_encontrado = None
+
+    for notebook in notebooks:
+        if notebook["patrimonio"] == patrimonio:
+            notebook_encontrado = notebook
+            break
+
+    if notebook_encontrado is None:
+        flash("Notebook não encontrado.", "erro")
+        return redirect(url_for("inicio"))
+
+    status = request.form.get("status", "").strip()
+    observacao = request.form.get("observacao", "").strip()
+
+    status_validos = {
+        "Disponível",
+        "Locado",
+        "Em revisão",
+        "Uso interno"
+    }
+
+    if status not in status_validos:
+        flash("Status inválido.", "erro")
+        return redirect(url_for("inicio"))
+
+    notebook_encontrado["disponivel"] = status == "Disponível"
+    notebook_encontrado["status"] = status
+    notebook_encontrado["observacao"] = observacao
+
+    salvar_notebooks(notebooks)
+
+    flash("Notebook atualizado com sucesso!", "sucesso")
+    return redirect(url_for("inicio"))
 
 
 if __name__ == "__main__":

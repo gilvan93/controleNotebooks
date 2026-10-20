@@ -31,11 +31,9 @@
                 </a>
 
                 <form method="POST" action="{{ url_for('logout') }}">
-                    <input
-                        type="hidden"
-                        name="csrf_token"
-                        value="{{ csrf_token() }}"
-                    >
+                    <input type="hidden"
+                           name="csrf_token"
+                           value="{{ csrf_token() }}">
 
                     <button type="submit" class="botao-sair-admin">
                         Sair
@@ -44,13 +42,10 @@
 
             </div>
         </div>
-
     {% else %}
-
         <a href="{{ url_for('login') }}" class="botao-login">
             🔐 Login administrativo
         </a>
-
     {% endif %}
 
 
@@ -85,7 +80,6 @@
     </div>
 
 
-    <!-- Título -->
     <h1>Estoque de Notebooks</h1>
 
 
@@ -104,10 +98,15 @@
                         <th>Serial</th>
                         <th>Marca</th>
                         <th>Modelo</th>
-                        <th>Disponibilidade</th>
+                        <th>Status</th>
                         <th>Memória RAM</th>
                         <th>Armazenamento</th>
                         <th>Referência</th>
+                        <th>Observação</th>
+
+                        {% if session.get("admin_logado") %}
+                            <th>Ações</th>
+                        {% endif %}
                     </tr>
                 </thead>
 
@@ -121,21 +120,78 @@
                             <td>{{ notebook["marca"] }}</td>
                             <td>{{ notebook["modelo"] }}</td>
 
+                            <!-- Status atual -->
                             <td>
-                                {% if notebook["disponivel"] %}
-                                    <span class="status disponivel">
-                                        Disponível
-                                    </span>
-                                {% else %}
-                                    <span class="status locado">
-                                        Locado
-                                    </span>
+                                {% set status_atual = notebook.get("status") %}
+
+                                {% if not status_atual %}
+                                    {% set status_atual = "Disponível" if notebook["disponivel"] else "Locado" %}
                                 {% endif %}
+
+                                <span class="status
+                                    {% if status_atual == 'Disponível' %}disponivel
+                                    {% elif status_atual == 'Locado' %}locado
+                                    {% else %}em-revisao
+                                    {% endif %}">
+                                    {{ status_atual }}
+                                </span>
                             </td>
 
                             <td>{{ notebook["memoria_ram"] }}</td>
                             <td>{{ notebook["armazenamento"] }}</td>
                             <td>{{ notebook["referencia"] }}</td>
+
+                            <!-- Observação -->
+                            <td>
+                                {{ notebook.get("observacao", "") or "—" }}
+                            </td>
+
+                            <!-- Edição exclusiva do administrador -->
+                            {% if session.get("admin_logado") %}
+                                <td>
+                                    <form method="POST"
+                                          action="{{ url_for('editar_notebook', patrimonio=notebook['patrimonio']) }}">
+
+                                        <input type="hidden"
+                                               name="csrf_token"
+                                               value="{{ csrf_token() }}">
+
+                                        <select name="status" required>
+                                            <option value="Disponível"
+                                                {% if status_atual == "Disponível" %}selected{% endif %}>
+                                                Disponível
+                                            </option>
+
+                                            <option value="Locado"
+                                                {% if status_atual == "Locado" %}selected{% endif %}>
+                                                Locado
+                                            </option>
+
+                                            <option value="Em revisão"
+                                                {% if status_atual == "Em revisão" %}selected{% endif %}>
+                                                Em revisão
+                                            </option>
+
+                                            <option value="Uso interno"
+                                                {% if status_atual == "Uso interno" %}selected{% endif %}>
+                                                Uso interno
+                                            </option>
+                                        </select>
+
+                                        <textarea
+                                            name="observacao"
+                                            rows="2"
+                                            placeholder="Observação do notebook"
+                                        >{{ notebook.get("observacao", "") }}</textarea>
+
+                                        <button type="submit">
+                                            Salvar
+                                        </button>
+
+                                    </form>
+                                </td>
+                            {% endif %}
+
                         </tr>
 
                     {% endfor %}
@@ -184,4 +240,5 @@
     </script>
 
 </body>
+
 </html>
