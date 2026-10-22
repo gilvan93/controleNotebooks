@@ -586,3 +586,496 @@ body.pagina-login {
     color: #b91c1c;
     border-color: #fecaca;
 }
+
+/* Melhorias visuais da página principal */
+
+body:not(.pagina-login) {
+    font-family: Arial, sans-serif;
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+.indicador {
+    border: 1px solid #e2e8f0;
+    border-top-width: 4px;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.indicador:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.10);
+}
+
+.grupo-processador {
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.06);
+}
+
+.grupo-processador h2 {
+    color: #163665;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+table {
+    font-size: 14px;
+}
+
+th {
+    color: #334155;
+    background-color: #e8eef7;
+    white-space: nowrap;
+}
+
+td {
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background-color: #eff6ff;
+}
+
+/* Melhorias no campo de pesquisa */
+
+.pesquisa {
+    max-width: 850px;
+    margin: 0 auto 30px;
+}
+
+.pesquisa input {
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 16px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pesquisa input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.pesquisa input::placeholder {
+    color: #94a3b8;
+}
+
+/* Status: Em revisão */
+
+.status.em-revisao {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* Status: Uso interno */
+
+.status.uso-interno {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+/* Campos de edição na tabela */
+
+td select,
+td textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background-color: #ffffff;
+    color: #334155;
+    font-family: inherit;
+    font-size: 13px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+td select:focus,
+td textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+td textarea {
+    min-height: 60px;
+    resize: vertical;
+}
+
+td form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 150px;
+}
+
+/* Botão Salvar na tabela */
+
+td form button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+td form button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+td form button:active {
+    transform: translateY(0);
+}
+
+/* Ajustes para telas menores */
+
+@media (max-width: 768px) {
+    body:not(.pagina-login) {
+        margin: 16px;
+    }
+
+    .indicadores {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .indicador {
+        flex: 1 1 140px;
+        padding: 16px;
+    }
+
+    .indicador h3 {
+        font-size: 14px;
+    }
+
+    .indicador p {
+        font-size: 26px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .grupo-processador h2 {
+        font-size: 17px;
+    }
+
+    table {
+        min-width: 950px;
+    }
+}
+
+/* Título principal do estoque */
+
+body:not(.pagina-login) > h1 {
+    color: #163665;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    margin-top: 20px;
+    margin-bottom: 32px;
+}
+
+/* Títulos dos grupos de processadores */
+
+.grupo-processador h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #163665;
+    font-weight: 700;
+    padding: 18px 20px;
+}
+
+/* Refinamento dos cartões de indicadores */
+
+.indicadores {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 35px;
+}
+
+.indicador {
+    padding: 24px 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.indicador h3 {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.indicador p {
+    margin-top: 12px;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Cores dos novos indicadores */
+
+.indicador.em-revisao {
+    border-top: 4px solid #d97706;
+}
+
+.indicador.em-revisao p {
+    color: #d97706;
+}
+
+.indicador.uso-interno {
+    border-top: 4px solid #2563eb;
+}
+
+.indicador.uso-interno p {
+    color: #2563eb;
+}
+
+/* Pesquisa e filtro por status */
+
+.filtros-estoque {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.filtros-estoque .pesquisa {
+    flex: 1;
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+.filtro-status {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 190px;
+}
+
+.filtro-status label {
+    color: #475569;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.filtro-status select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #334155;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filtro-status select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+@media (max-width: 600px) {
+    .filtros-estoque {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filtro-status {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+/* Última atualização do estoque */
+
+.ultima-atualizacao {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: -15px 0 25px;
+    padding: 14px 18px;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+}
+
+.icone-atualizacao {
+    font-size: 24px;
+}
+
+.ultima-atualizacao strong {
+    display: block;
+    color: #334155;
+    font-size: 14px;
+}
+
+.ultima-atualizacao p {
+    margin: 5px 0 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* Botão para editar notebook */
+.botao-editar-notebook {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    list-style: none;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.botao-editar-notebook:hover {
+    background-color: #1d4ed8;
+}
+
+/* Formulário de edição */
+
+.formulario-edicao-notebook {
+    margin-top: 12px;
+    padding: 18px;
+    width: 300px;
+    max-width: calc(100vw - 100px);
+    height: 65vh;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+    text-align: left;
+}
+
+
+.formulario-edicao-notebook label {
+    display: block;
+    margin: 12px 0 5px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.formulario-edicao-notebook input,
+.formulario-edicao-notebook select,
+.formulario-edicao-notebook textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: #f8fafc;
+    color: #1e293b;
+    font: inherit;
+}
+
+.formulario-edicao-notebook input:focus,
+.formulario-edicao-notebook select:focus,
+.formulario-edicao-notebook textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.formulario-edicao-notebook button {
+    width: 100%;
+    margin-top: 16px;
+    padding: 11px;
+    border: none;
+    border-radius: 6px;
+    background-color: #16a34a;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.formulario-edicao-notebook button:hover {
+    background-color: #15803d;
+}
+
+
+/* Destacar a edição aberta */
+.edicao-notebook[open] {
+    position: relative;
+    z-index: 10;
+}
+
+.edicao-notebook[open] .botao-editar-notebook {
+    background-color: #1e40af;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Identificar melhor o formulário aberto */
+.edicao-notebook[open] .formulario-edicao-notebook {
+    border-color: #93c5fd;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.14);
+}
+
+
+/* Ajustes para celulares */
+@media (max-width: 600px) {
+    body:not(.pagina-login) {
+        margin: 12px;
+    }
+
+    body:not(.pagina-login) > h1 {
+        font-size: 24px;
+        margin-top: 16px;
+        margin-bottom: 24px;
+    }
+
+    .indicadores {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 24px;
+    }
+
+    .indicador {
+        min-width: 0;
+        padding: 16px 10px;
+    }
+
+    .indicador h3 {
+        font-size: 12px;
+    }
+
+    .indicador p {
+        font-size: 26px;
+    }
+
+    .filtros-estoque {
+        gap: 12px;
+    }
+
+    .pesquisa input {
+        font-size: 14px;
+        padding: 13px;
+    }
+
+    .ultima-atualizacao {
+        margin-top: 0;
+        padding: 12px;
+    }
+}
+

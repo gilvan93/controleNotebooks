@@ -1,5 +1,5 @@
 
-
+from datetime import datetime
 from funcoes.dados import carregar_notebooks, salvar_notebooks
 import os
 from functools import wraps
@@ -82,20 +82,51 @@ def logout():
     return redirect(url_for("inicio"))
 
 
+
 @app.route("/")
 def inicio():
     notebooks = carregar_notebooks()
+    atualizacoes = [
+        notebook["ultima_atualizacao"]
+        for notebook in notebooks
+        if notebook.get("ultima_atualizacao")
+    ]
 
+    ultima_atualizacao = max(atualizacoes) if atualizacoes else None
     total = len(notebooks)
+
+    def obter_status(notebook):
+        status = notebook.get("status")
+
+        if status in {
+            "Disponível",
+            "Locado",
+            "Em revisão",
+            "Uso interno"
+        }:
+            return status
+
+        # Compatibilidade com registros antigos
+        return "Disponível" if notebook.get("disponivel", False) else "Locado"
 
     disponiveis = sum(
         1 for notebook in notebooks
-        if notebook["disponivel"]
+        if obter_status(notebook) == "Disponível"
     )
 
     locados = sum(
         1 for notebook in notebooks
-        if not notebook["disponivel"]
+        if obter_status(notebook) == "Locado"
+    )
+
+    em_revisao = sum(
+        1 for notebook in notebooks
+        if obter_status(notebook) == "Em revisão"
+    )
+
+    uso_interno = sum(
+        1 for notebook in notebooks
+        if obter_status(notebook) == "Uso interno"
     )
 
     processadores = {}
@@ -114,7 +145,10 @@ def inicio():
         total=total,
         disponiveis=disponiveis,
         locados=locados,
-        processadores=processadores
+        em_revisao=em_revisao,
+        uso_interno=uso_interno,
+        processadores=processadores,
+        ultima_atualizacao=ultima_atualizacao
     )
 
 
@@ -160,6 +194,7 @@ def cadastrar():
 
     return render_template("cadastrar.html")
 
+
 @app.route("/editar/<patrimonio>", methods=["POST"])
 @login_obrigatorio
 def editar_notebook(patrimonio):
@@ -176,9 +211,28 @@ def editar_notebook(patrimonio):
         flash("Notebook não encontrado.", "erro")
         return redirect(url_for("inicio"))
 
+    # Receber os campos do formulário
+    novo_patrimonio = request.form.get("patrimonio", "").strip()
+    serial = request.form.get("serial", "").strip()
+    marca = request.form.get("marca", "").strip()
+    modelo = request.form.get("modelo", "").strip()
+    processador = request.form.get("processador", "").strip()
+    memoria_ram = request.form.get("memoria_ram", "").strip()
+    armazenamento = request.form.get("armazenamento", "").strip()
+    referencia = request.form.get("referencia", "").strip()
     status = request.form.get("status", "").strip()
     observacao = request.form.get("observacao", "").strip()
 
+    # Validar campos obrigatórios
+    if not all([
+        novo_patrimonio, serial, marca, modelo,
+        processador, memoria_ram, armazenamento,
+        referencia, status
+    ]):
+        flash("Preencha todos os campos obrigatórios.", "erro")
+        return redirect(url_for("inicio"))
+
+    # Validar status
     status_validos = {
         "Disponível",
         "Locado",
@@ -190,14 +244,42 @@ def editar_notebook(patrimonio):
         flash("Status inválido.", "erro")
         return redirect(url_for("inicio"))
 
-    notebook_encontrado["disponivel"] = status == "Disponível"
+    # Impedir patrimônio ou serial duplicado
+    for notebook in notebooks:
+        if notebook is notebook_encontrado:
+            continue
+
+        if notebook["patrimonio"] == novo_patrimonio:
+            flash("Esse patrimônio já está cadastrado.", "erro")
+            return redirect(url_for("inicio"))
+
+        if notebook["serial"] == serial:
+            flash("Esse número de série já está cadastrado.", "erro")
+            return redirect(url_for("inicio"))
+
+    # Atualizar os dados do notebook
+    notebook_encontrado["patrimonio"] = novo_patrimonio
+    notebook_encontrado["serial"] = serial
+    notebook_encontrado["marca"] = marca
+    notebook_encontrado["modelo"] = modelo
+    notebook_encontrado["processador"] = processador
+    notebook_encontrado["memoria_ram"] = memoria_ram
+    notebook_encontrado["armazenamento"] = armazenamento
+    notebook_encontrado["referencia"] = referencia
     notebook_encontrado["status"] = status
+    notebook_encontrado["disponivel"] = status == "Disponível"
     notebook_encontrado["observacao"] = observacao
+
+    # Registrar data e hora da alteração
+    notebook_encontrado["ultima_atualizacao"] = datetime.now().isoformat(
+        timespec="seconds"
+    )
 
     salvar_notebooks(notebooks)
 
     flash("Notebook atualizado com sucesso!", "sucesso")
     return redirect(url_for("inicio"))
+
 
 
 if __name__ == "__main__":
