@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -8,22 +7,22 @@
 
     <title>Estoque de Notebooks</title>
 
-        <!-- Última atualização do estoque -->
-        <div class="ultima-atualizacao">
-            <span class="icone-atualizacao">🕒</span>
+    <!-- Última atualização do estoque -->
+    <div class="ultima-atualizacao">
+        <span class="icone-atualizacao">🕒</span>
 
-            <div>
-                <strong>Última atualização do estoque</strong>
+        <div>
+            <strong>Última atualização do estoque</strong>
 
-                {% if ultima_atualizacao %}
-                    <p>
-                        {{ ultima_atualizacao[8:10] }}/{{ ultima_atualizacao[5:7] }}/{{ ultima_atualizacao[0:4] }} às {{ ultima_atualizacao[11:16] }}
-                    </p>
-                {% else %}
-                    <p>Nenhuma atualização registrada ainda.</p>
-                {% endif %}
-            </div>
+            {% if ultima_atualizacao %}
+                <p>
+                    {{ ultima_atualizacao[8:10] }}/{{ ultima_atualizacao[5:7] }}/{{ ultima_atualizacao[0:4] }} às {{ ultima_atualizacao[11:16] }}
+                </p>
+            {% else %}
+                <p>Nenhuma atualização registrada ainda.</p>
+            {% endif %}
         </div>
+    </div>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
@@ -66,56 +65,55 @@
     {% endif %}
 
 
-    <!-- Pesquisa -->
+    <!-- Pesquisa e filtros do estoque -->
+    <div class="filtros-estoque">
 
-<!-- Pesquisa e filtro por status -->
+        <div class="pesquisa">
+            <input
+                type="text"
+                id="campoPesquisa"
+                placeholder="🔎 Pesquisar patrimônio, serial, marca, modelo ou processador..."
+            >
+        </div>
 
-<!-- Pesquisa e filtros do estoque -->
-<div class="filtros-estoque">
+        <div class="filtro-status">
+            <label for="filtroStatus">Status:</label>
+            <select id="filtroStatus">
+                <option value="">Todos os status</option>
+                <option value="Disponível">Disponível</option>
+                <option value="Locado">Locado</option>
+                <option value="Em revisão">Em revisão</option>
+                <option value="Uso interno">Uso interno</option>
+            </select>
+        </div>
 
-    <div class="pesquisa">
-        <input
-            type="text"
-            id="campoPesquisa"
-            placeholder="🔎 Pesquisar patrimônio, serial, marca, modelo ou processador..."
-        >
+        <div class="filtro-status">
+            <label for="filtroProcessador">Processador:</label>
+            <select id="filtroProcessador">
+                <option value="">Todos os processadores</option>
+            </select>
+        </div>
+
+        <div class="filtro-status">
+            <label for="filtroRam">Memória RAM:</label>
+            <select id="filtroRam">
+                <option value="">Todas as memórias</option>
+            </select>
+        </div>
+
+        <div class="filtro-status">
+            <label for="filtroArmazenamento">Armazenamento:</label>
+            <select id="filtroArmazenamento">
+                <option value="">Todos os armazenamentos</option>
+            </select>
+        </div>
+
     </div>
 
-    <div class="filtro-status">
-        <label for="filtroStatus">Status:</label>
-        <select id="filtroStatus">
-            <option value="">Todos os status</option>
-            <option value="Disponível">Disponível</option>
-            <option value="Locado">Locado</option>
-            <option value="Em revisão">Em revisão</option>
-            <option value="Uso interno">Uso interno</option>
-        </select>
-    </div>
-
-    <div class="filtro-status">
-        <label for="filtroProcessador">Processador:</label>
-        <select id="filtroProcessador">
-            <option value="">Todos os processadores</option>
-        </select>
-    </div>
-
-    <div class="filtro-status">
-        <label for="filtroRam">Memória RAM:</label>
-        <select id="filtroRam">
-            <option value="">Todas as memórias</option>
-        </select>
-    </div>
-
-    <div class="filtro-status">
-        <label for="filtroArmazenamento">Armazenamento:</label>
-        <select id="filtroArmazenamento">
-            <option value="">Todos os armazenamentos</option>
-        </select>
-    </div>
-
-</div>
-
-
+    <!-- Contador de notebooks filtrados -->
+    <p id="contadorNotebooks">
+        Exibindo 0 notebooks
+    </p>
 
 
     <!-- Indicadores -->
@@ -135,15 +133,16 @@
             <h3>Locados</h3>
             <p>{{ locados }}</p>
         </div>
-                <div class="indicador em-revisao">
-                     <h3>Em revisão</h3>
-                    <p>{{ em_revisao }}</p>
-                </div>
 
-                <div class="indicador uso-interno">
-                    <h3>Uso interno</h3>
-                    <p>{{ uso_interno }}</p>
-                </div>
+        <div class="indicador em-revisao">
+            <h3>Em revisão</h3>
+            <p>{{ em_revisao }}</p>
+        </div>
+
+        <div class="indicador uso-interno">
+            <h3>Uso interno</h3>
+            <p>{{ uso_interno }}</p>
+        </div>
 
     </div>
 
@@ -158,154 +157,156 @@
 
             <h2>{{ processador }}</h2>
 
+            <table>
+                <thead>
+                    <tr>
+                        <th>Patrimônio</th>
+                        <th>Serial</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Status</th>
+                        <th>Memória RAM</th>
+                        <th>Armazenamento</th>
+                        <th>Referência</th>
+                        <th>Observação</th>
 
-<table>
-    <thead>
-        <tr>
-            <th>Patrimônio</th>
-            <th>Serial</th>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>Status</th>
-            <th>Memória RAM</th>
-            <th>Armazenamento</th>
-            <th>Referência</th>
-            <th>Observação</th>
+                        {% if session.get("admin_logado") %}
+                            <th>Ações</th>
+                        {% endif %}
+                    </tr>
+                </thead>
 
-            {% if session.get("admin_logado") %}
-                <th>Ações</th>
-            {% endif %}
-        </tr>
-    </thead>
+                <tbody>
+                    {% for notebook in notebooks_processador %}
+                        <tr>
+                            {% set status_atual = notebook.get("status") %}
+                            {% if not status_atual %}
+                                {% set status_atual = "Disponível" if notebook["disponivel"] else "Locado" %}
+                            {% endif %}
 
-    <tbody>
-        {% for notebook in notebooks_processador %}
-            <tr>
-                {% set status_atual = notebook.get("status") %}
-                {% if not status_atual %}
-                    {% set status_atual = "Disponível" if notebook["disponivel"] else "Locado" %}
-                {% endif %}
+                            <td>{{ notebook["patrimonio"] }}</td>
+                            <td>{{ notebook["serial"] }}</td>
+                            <td>{{ notebook["marca"] }}</td>
+                            <td>{{ notebook["modelo"] }}</td>
 
-                <td>{{ notebook["patrimonio"] }}</td>
-                <td>{{ notebook["serial"] }}</td>
-                <td>{{ notebook["marca"] }}</td>
-                <td>{{ notebook["modelo"] }}</td>
+                            <td>
+                                <span class="status
+                                    {% if status_atual == 'Disponível' %}disponivel
+                                    {% elif status_atual == 'Locado' %}locado
+                                    {% elif status_atual == 'Em revisão' %}em-revisao
+                                    {% elif status_atual == 'Uso interno' %}uso-interno
+                                    {% endif %}">
+                                    {{ status_atual }}
+                                </span>
+                            </td>
 
-                <td>
-                    <span class="status
-                        {% if status_atual == 'Disponível' %}disponivel
-                        {% elif status_atual == 'Locado' %}locado
-                        {% elif status_atual == 'Em revisão' %}em-revisao
-                        {% elif status_atual == 'Uso interno' %}uso-interno
-                        {% endif %}">
-                        {{ status_atual }}
-                    </span>
-                </td>
+                            <td>{{ notebook["memoria_ram"] }}</td>
+                            <td>{{ notebook["armazenamento"] }}</td>
+                            <td>{{ notebook["referencia"] }}</td>
+                            <td>{{ notebook.get("observacao", "") or "—" }}</td>
 
-                <td>{{ notebook["memoria_ram"] }}</td>
-                <td>{{ notebook["armazenamento"] }}</td>
-                <td>{{ notebook["referencia"] }}</td>
-                <td>{{ notebook.get("observacao", "") or "—" }}</td>
+                            {% if session.get("admin_logado") %}
+                                <td>
+                                    <details class="edicao-notebook">
+                                        <summary class="botao-editar-notebook">
+                                            ✏️ Editar
+                                        </summary>
 
-                {% if session.get("admin_logado") %}
-                    <td>
-                        <details class="edicao-notebook">
-                            <summary class="botao-editar-notebook">
-                                ✏️ Editar
-                            </summary>
+                                        <form method="POST"
+                                              action="{{ url_for('editar_notebook', patrimonio=notebook['patrimonio']) }}"
+                                              class="formulario-edicao-notebook">
 
-                            <form method="POST"
-                                  action="{{ url_for('editar_notebook', patrimonio=notebook['patrimonio']) }}"
-                                  class="formulario-edicao-notebook">
+                                            <input type="hidden"
+                                                   name="csrf_token"
+                                                   value="{{ csrf_token() }}">
 
-                                <input type="hidden"
-                                       name="csrf_token"
-                                       value="{{ csrf_token() }}">
+                                            <label>Patrimônio</label>
+                                            <input type="text"
+                                                   name="patrimonio"
+                                                   value="{{ notebook['patrimonio'] }}"
+                                                   required>
 
-                                <label>Patrimônio</label>
-                                <input type="text"
-                                       name="patrimonio"
-                                       value="{{ notebook['patrimonio'] }}"
-                                       required>
+                                            <label>Serial</label>
+                                            <input type="text"
+                                                   name="serial"
+                                                   value="{{ notebook['serial'] }}"
+                                                   required>
 
-                                <label>Serial</label>
-                                <input type="text"
-                                       name="serial"
-                                       value="{{ notebook['serial'] }}"
-                                       required>
+                                            <label>Marca</label>
+                                            <input type="text"
+                                                   name="marca"
+                                                   value="{{ notebook['marca'] }}"
+                                                   required>
 
-                                <label>Marca</label>
-                                <input type="text"
-                                       name="marca"
-                                       value="{{ notebook['marca'] }}"
-                                       required>
+                                            <label>Modelo</label>
+                                            <input type="text"
+                                                   name="modelo"
+                                                   value="{{ notebook['modelo'] }}"
+                                                   required>
 
-                                <label>Modelo</label>
-                                <input type="text"
-                                       name="modelo"
-                                       value="{{ notebook['modelo'] }}"
-                                       required>
+                                            <label>Processador</label>
+                                            <input type="text"
+                                                   name="processador"
+                                                   value="{{ notebook['processador'] }}"
+                                                   required>
 
-                                <label>Processador</label>
-                                <input type="text"
-                                       name="processador"
-                                       value="{{ notebook['processador'] }}"
-                                       required>
+                                            <label>Memória RAM</label>
+                                            <input type="text"
+                                                   name="memoria_ram"
+                                                   value="{{ notebook['memoria_ram'] }}"
+                                                   required>
 
-                                <label>Memória RAM</label>
-                                <input type="text"
-                                       name="memoria_ram"
-                                       value="{{ notebook['memoria_ram'] }}"
-                                       required>
+                                            <label>Armazenamento</label>
+                                            <input type="text"
+                                                   name="armazenamento"
+                                                   value="{{ notebook['armazenamento'] }}"
+                                                   required>
 
-                                <label>Armazenamento</label>
-                                <input type="text"
-                                       name="armazenamento"
-                                       value="{{ notebook['armazenamento'] }}"
-                                       required>
+                                            <label>Referência</label>
+                                            <input type="text"
+                                                   name="referencia"
+                                                   value="{{ notebook['referencia'] }}"
+                                                   required>
 
-                                <label>Referência</label>
-                                <input type="text"
-                                       name="referencia"
-                                       value="{{ notebook['referencia'] }}"
-                                       required>
+                                            <label>Status</label>
+                                            <select name="status" required>
+                                                <option value="Disponível"
+                                                    {% if status_atual == "Disponível" %}selected{% endif %}>
+                                                    Disponível
+                                                </option>
 
-                                <label>Status</label>
-                                <select name="status" required>
-                                    <option value="Disponível"
-                                        {% if status_atual == "Disponível" %}selected{% endif %}>
-                                        Disponível
-                                    </option>
-                                    <option value="Locado"
-                                        {% if status_atual == "Locado" %}selected{% endif %}>
-                                        Locado
-                                    </option>
-                                    <option value="Em revisão"
-                                        {% if status_atual == "Em revisão" %}selected{% endif %}>
-                                        Em revisão
-                                    </option>
-                                    <option value="Uso interno"
-                                        {% if status_atual == "Uso interno" %}selected{% endif %}>
-                                        Uso interno
-                                    </option>
-                                </select>
+                                                <option value="Locado"
+                                                    {% if status_atual == "Locado" %}selected{% endif %}>
+                                                    Locado
+                                                </option>
 
-                                <label>Observação</label>
-                                <textarea name="observacao"
-                                          rows="3"
-                                          placeholder="Observação do notebook">{{ notebook.get("observacao", "") }}</textarea>
+                                                <option value="Em revisão"
+                                                    {% if status_atual == "Em revisão" %}selected{% endif %}>
+                                                    Em revisão
+                                                </option>
 
-                                <button type="submit">
-                                    Salvar alterações
-                                </button>
-                            </form>
-                        </details>
-                    </td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+                                                <option value="Uso interno"
+                                                    {% if status_atual == "Uso interno" %}selected{% endif %}>
+                                                    Uso interno
+                                                </option>
+                                            </select>
+
+                                            <label>Observação</label>
+                                            <textarea name="observacao"
+                                                      rows="3"
+                                                      placeholder="Observação do notebook">{{ notebook.get("observacao", "") }}</textarea>
+
+                                            <button type="submit">
+                                                Salvar alterações
+                                            </button>
+                                        </form>
+                                    </details>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
         </section>
 
@@ -313,140 +314,169 @@
 
 
     <!-- Pesquisa dinâmica -->
+    <script>
+        const campoPesquisa = document.getElementById("campoPesquisa");
+        const filtroStatus = document.getElementById("filtroStatus");
+        const filtroProcessador = document.getElementById("filtroProcessador");
+        const filtroRam = document.getElementById("filtroRam");
+        const filtroArmazenamento = document.getElementById("filtroArmazenamento");
+        const contadorNotebooks = document.getElementById("contadorNotebooks");
 
 
-<script>
-    const campoPesquisa = document.getElementById("campoPesquisa");
-    const filtroStatus = document.getElementById("filtroStatus");
-    const filtroProcessador = document.getElementById("filtroProcessador");
-    const filtroRam = document.getElementById("filtroRam");
-    const filtroArmazenamento = document.getElementById("filtroArmazenamento");
+        // Preenche os filtros com os valores existentes na tabela
+        function preencherFiltro(idFiltro, coluna) {
+            const filtro = document.getElementById(idFiltro);
+            const valores = new Set();
 
-    // Preenche os filtros com os valores existentes na tabela
-    function preencherFiltro(idFiltro, coluna) {
-        const filtro = document.getElementById(idFiltro);
-        const valores = new Set();
-
-        document.querySelectorAll(".grupo-processador tbody tr").forEach(function (linha) {
-            const celulas = linha.querySelectorAll("td");
-            let valor = celulas[coluna]?.textContent.trim();
-
-            if (idFiltro === "filtroRam" && valor) {
-                valor = valor
-                    .replace(/\s*gb\s*/gi, " GB")
-                    .replace(/\s+/g, " ")
-                    .trim();
-            }
-
-            if (valor) {
-                valores.add(valor);
-            }
-        });
-
-        [...valores]
-            .sort((a, b) => a.localeCompare(b, "pt-BR", { numeric: true }))
-            .forEach(function (valor) {
-                const opcao = document.createElement("option");
-                opcao.value = valor;
-                opcao.textContent = valor;
-                filtro.appendChild(opcao);
-            });
-    }
-
-    // Índices das colunas: processador fica no título do grupo.
-    preencherFiltro("filtroRam", 5);
-    preencherFiltro("filtroArmazenamento", 6);
-
-    // Processadores são obtidos dos títulos dos grupos.
-    const processadoresExistentes = new Set();
-
-    document.querySelectorAll(".grupo-processador h2").forEach(function (titulo) {
-        const processador = titulo.textContent.trim();
-
-        if (processador) {
-            processadoresExistentes.add(processador);
-        }
-    });
-
-    [...processadoresExistentes]
-        .sort((a, b) => a.localeCompare(b, "pt-BR", { numeric: true }))
-        .forEach(function (processador) {
-            const opcao = document.createElement("option");
-            opcao.value = processador;
-            opcao.textContent = processador;
-            filtroProcessador.appendChild(opcao);
-        });
-
-    function filtrarEstoque() {
-        const pesquisa = campoPesquisa.value.toLowerCase().trim();
-        const statusSelecionado = filtroStatus.value;
-        const processadorSelecionado = filtroProcessador.value;
-        const ramSelecionada = filtroRam.value;
-        const armazenamentoSelecionado = filtroArmazenamento.value;
-
-        const grupos = document.querySelectorAll(".grupo-processador");
-
-        grupos.forEach(function (grupo) {
-            const tituloProcessador = grupo.querySelector("h2").textContent.trim();
-            const linhas = grupo.querySelectorAll("tbody tr");
-            let encontrouResultado = false;
-
-            linhas.forEach(function (linha) {
+            document.querySelectorAll(".grupo-processador tbody tr").forEach(function (linha) {
                 const celulas = linha.querySelectorAll("td");
-                const textoLinha = (
-                    linha.textContent + " " + tituloProcessador
-                ).toLowerCase();
+                let valor = celulas[coluna]?.textContent.trim();
 
-                const elementoStatus = linha.querySelector(".status");
-                const statusNotebook = elementoStatus
-                    ? elementoStatus.textContent.trim()
-                    : "";
+                if (idFiltro === "filtroRam" && valor) {
+                    valor = valor
+                        .replace(/\s*gb\s*/gi, " GB")
+                        .replace(/\s+/g, " ")
+                        .trim();
+                }
 
-                const ramNotebook = (celulas[5]?.textContent.trim() || "")
-                .replace(/\s*gb\s*/gi, " GB")
-                .replace(/\s+/g, " ")
-                .trim();
-                const armazenamentoNotebook = celulas[6]?.textContent.trim() || "";
-
-                const correspondePesquisa = textoLinha.includes(pesquisa);
-                const correspondeStatus =
-                    !statusSelecionado || statusNotebook === statusSelecionado;
-                const correspondeProcessador =
-                    !processadorSelecionado || tituloProcessador === processadorSelecionado;
-                const correspondeRam =
-                    !ramSelecionada || ramNotebook === ramSelecionada;
-                const correspondeArmazenamento =
-                    !armazenamentoSelecionado ||
-                    armazenamentoNotebook === armazenamentoSelecionado;
-
-                const exibir =
-                    correspondePesquisa &&
-                    correspondeStatus &&
-                    correspondeProcessador &&
-                    correspondeRam &&
-                    correspondeArmazenamento;
-
-                linha.style.display = exibir ? "" : "none";
-
-                if (exibir) {
-                    encontrouResultado = true;
+                if (valor) {
+                    valores.add(valor);
                 }
             });
 
-            grupo.style.display = encontrouResultado ? "" : "none";
+            [...valores]
+                .sort((a, b) => a.localeCompare(b, "pt-BR", { numeric: true }))
+                .forEach(function (valor) {
+                    const opcao = document.createElement("option");
+                    opcao.value = valor;
+                    opcao.textContent = valor;
+                    filtro.appendChild(opcao);
+                });
+        }
+
+
+        // Preenche os filtros de RAM e armazenamento
+        preencherFiltro("filtroRam", 5);
+        preencherFiltro("filtroArmazenamento", 6);
+
+
+        // Processadores são obtidos dos títulos dos grupos
+        const processadoresExistentes = new Set();
+
+        document.querySelectorAll(".grupo-processador h2").forEach(function (titulo) {
+            const processador = titulo.textContent.trim();
+
+            if (processador) {
+                processadoresExistentes.add(processador);
+            }
         });
-    }
 
-    campoPesquisa.addEventListener("input", filtrarEstoque);
-    filtroStatus.addEventListener("change", filtrarEstoque);
-    filtroProcessador.addEventListener("change", filtrarEstoque);
-    filtroRam.addEventListener("change", filtrarEstoque);
-    filtroArmazenamento.addEventListener("change", filtrarEstoque);
+        [...processadoresExistentes]
+            .sort((a, b) => a.localeCompare(b, "pt-BR", { numeric: true }))
+            .forEach(function (processador) {
+                const opcao = document.createElement("option");
+                opcao.value = processador;
+                opcao.textContent = processador;
+                filtroProcessador.appendChild(opcao);
+            });
 
-    filtrarEstoque();
-</script>
 
+        function filtrarEstoque() {
+            let quantidadeExibida = 0;
+
+            const pesquisa = campoPesquisa.value.toLowerCase().trim();
+            const statusSelecionado = filtroStatus.value;
+            const processadorSelecionado = filtroProcessador.value;
+            const ramSelecionada = filtroRam.value;
+            const armazenamentoSelecionado = filtroArmazenamento.value;
+
+            const grupos = document.querySelectorAll(".grupo-processador");
+
+            grupos.forEach(function (grupo) {
+                const tituloProcessador = grupo.querySelector("h2").textContent.trim();
+                const linhas = grupo.querySelectorAll("tbody tr");
+                let encontrouResultado = false;
+
+                linhas.forEach(function (linha) {
+                    const celulas = linha.querySelectorAll("td");
+
+                    const textoLinha = (
+                        linha.textContent + " " + tituloProcessador
+                    ).toLowerCase();
+
+                    const elementoStatus = linha.querySelector(".status");
+
+                    const statusNotebook = elementoStatus
+                        ? elementoStatus.textContent.trim()
+                        : "";
+
+                    const ramNotebook = (celulas[5]?.textContent.trim() || "")
+                        .replace(/\s*gb\s*/gi, " GB")
+                        .replace(/\s+/g, " ")
+                        .trim();
+
+                    const armazenamentoNotebook =
+                        celulas[6]?.textContent.trim() || "";
+
+                    const correspondePesquisa = textoLinha.includes(pesquisa);
+
+                    const correspondeStatus =
+                        !statusSelecionado || statusNotebook === statusSelecionado;
+
+                    const correspondeProcessador =
+                        !processadorSelecionado ||
+                        tituloProcessador === processadorSelecionado;
+
+                    const correspondeRam =
+                        !ramSelecionada || ramNotebook === ramSelecionada;
+
+                    const correspondeArmazenamento =
+                        !armazenamentoSelecionado ||
+                        armazenamentoNotebook === armazenamentoSelecionado;
+
+                    const exibir =
+                        correspondePesquisa &&
+                        correspondeStatus &&
+                        correspondeProcessador &&
+                        correspondeRam &&
+                        correspondeArmazenamento;
+
+                    linha.style.display = exibir ? "" : "none";
+
+                    if (exibir) {
+                        encontrouResultado = true;
+                        quantidadeExibida++;
+                    }
+                });
+
+                grupo.style.display = encontrouResultado ? "" : "none";
+            });
+
+            // Atualiza o contador depois de percorrer todos os grupos
+            const totalNotebooks = document.querySelectorAll(
+                ".grupo-processador tbody tr"
+            ).length;
+
+            contadorNotebooks.textContent =
+                `Exibindo ${quantidadeExibida} de ${totalNotebooks} notebooks`;
+        }
+
+
+        // Atualiza os resultados ao pesquisar ou alterar filtros
+        campoPesquisa.addEventListener("input", filtrarEstoque);
+        filtroStatus.addEventListener("change", filtrarEstoque);
+        filtroProcessador.addEventListener("change", filtrarEstoque);
+        filtroRam.addEventListener("change", filtrarEstoque);
+        filtroArmazenamento.addEventListener("change", filtrarEstoque);
+
+        // Executa a filtragem assim que a página carrega
+        filtrarEstoque();
+    </script>
 
 </body>
+
+<footer class="rodape">
+    GT.
+</footer>
 
 </html>

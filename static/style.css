@@ -1079,3 +1079,30 @@ body:not(.pagina-login) > h1 {
     }
 }
 
+/* Contador de notebooks filtrados */
+#contadorNotebooks {
+    display: inline-block;
+    margin: 18px 0 20px;
+    padding: 10px 18px;
+
+    background-color: #eef4ff;
+    color: #234b87;
+
+    border: 1px solid #d5e2fa;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Rodapé da página */
+.rodape {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #777;
+    font-size: 14px;
+    border-top: 1px solid #e0e0e0;
+}

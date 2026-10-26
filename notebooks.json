@@ -43,7 +43,10 @@
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "5154"
+        "referencia": "5154",
+        "status": "Locado",
+        "observacao": "Eugenio",
+        "ultima_atualizacao": "2026-10-26T16:05:31"
     },
     {
         "patrimonio": "4328",
@@ -54,7 +57,10 @@
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "5154"
+        "referencia": "5154",
+        "status": "Locado",
+        "observacao": "Eugenio",
+        "ultima_atualizacao": "2026-10-26T16:05:44"
     },
     {
         "patrimonio": "4329",
@@ -65,7 +71,10 @@
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "5154"
+        "referencia": "5154",
+        "status": "Em revis\u00e3o",
+        "observacao": "porta USB com defeito(Ivan)",
+        "ultima_atualizacao": "2026-10-23T14:40:11"
     },
     {
         "patrimonio": "4330",
@@ -131,7 +140,10 @@
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "5154"
+        "referencia": "5154",
+        "status": "Locado",
+        "observacao": "Eugenio",
+        "ultima_atualizacao": "2026-10-26T16:06:24"
     },
     {
         "patrimonio": "4348",
@@ -142,7 +154,10 @@
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "5154"
+        "referencia": "5154",
+        "status": "Locado",
+        "observacao": "Eugenio",
+        "ultima_atualizacao": "2026-10-26T16:04:36"
     },
     {
         "patrimonio": "4352",
@@ -153,7 +168,10 @@
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "5154"
+        "referencia": "5154",
+        "status": "Locado",
+        "observacao": "Eugenio",
+        "ultima_atualizacao": "2026-10-26T16:04:52"
     },
     {
         "patrimonio": "4353",
@@ -164,7 +182,10 @@
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "5154"
+        "referencia": "5154",
+        "status": "Locado",
+        "observacao": "Eugenio",
+        "ultima_atualizacao": "2026-10-26T16:05:06"
     },
     {
         "patrimonio": "4354",
@@ -175,7 +196,10 @@
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "5154"
+        "referencia": "5154",
+        "status": "Locado",
+        "observacao": "Eugenio",
+        "ultima_atualizacao": "2026-10-26T16:05:18"
     },
     {
         "patrimonio": "4355",
@@ -197,7 +221,10 @@
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "5154"
+        "referencia": "5154",
+        "status": "Em revis\u00e3o",
+        "observacao": "porta USB com defeito(Ivan)",
+        "ultima_atualizacao": "2026-10-23T14:39:57"
     },
     {
         "patrimonio": "4621",
@@ -242,7 +269,7 @@
         "ultima_atualizacao": "2026-10-22T11:30:45"
     },
     {
-        "patrimonio": "3924",
+        "patrimonio": "4624",
         "serial": "PE04WEWM",
         "marca": "LENOVO",
         "modelo": "THINKPAD T480",
@@ -252,8 +279,8 @@
         "armazenamento": "240 GB SSD",
         "referencia": "5395",
         "status": "Locado",
-        "observacao": "",
-        "ultima_atualizacao": "2026-10-22T11:31:09"
+        "observacao": "esse PAT \u00e9 o que est\u00e1 no sistema. Cadastrei antes com 3924",
+        "ultima_atualizacao": "2026-10-26T15:38:55"
     },
     {
         "patrimonio": "3927",
@@ -925,7 +952,10 @@
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "5038"
+        "referencia": "5038",
+        "status": "Uso interno",
+        "observacao": "usado por Joselia",
+        "ultima_atualizacao": "2026-10-23T14:42:05"
     },
     {
         "patrimonio": "4169",
@@ -1160,7 +1190,10 @@
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "5049"
+        "referencia": "5049",
+        "status": "Uso interno",
+        "observacao": "usado por Carolina",
+        "ultima_atualizacao": "2026-10-23T14:43:12"
     },
     {
         "patrimonio": "4217",
@@ -1178,11 +1211,14 @@
         "serial": "PE0953DM",
         "marca": "LENOVO",
         "modelo": "IDEPAD 3 - 15IML14",
-        "disponivel": true,
+        "disponivel": false,
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "5049"
+        "referencia": "5049",
+        "status": "Em revis\u00e3o",
+        "observacao": "Dano na tampa, trocar.",
+        "ultima_atualizacao": "2026-10-23T14:44:05"
     },
     {
         "patrimonio": "4223",
@@ -1350,6 +1386,9 @@
         "memoria_ram": "4 GB",
         "processador": "I3",
         "armazenamento": "256 GB SSD",
-        "referencia": "4931"
+        "referencia": "4931",
+        "status": "Uso interno",
+        "observacao": "usado por Hilda",
+        "ultima_atualizacao": "2026-10-23T14:46:17"
     }
 ]
